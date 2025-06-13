@@ -1,0 +1,141 @@
+{% extends "_base.html" %}
+{% load static %}
+
+
+{% block title %}About Us | HomeConnect Global{% endblock %}
+{% block meta_description %}Learn more about HomeConnect Global, our mission, vision, and the dedicated team behind our success.{% endblock %}
+{% block meta_keywords %}e-Swift, real estate, about us, real estate company, property experts, real estate services{% endblock %}
+{% block css %}{% static 'css/about.css' %}{% endblock %}
+{% block other_css %}{% static 'css/home.css' %}{% endblock %}
+
+{% block og_title %}About Us | HomeConnect Global{% endblock %}
+{% block og_description %}Discover the story behind HomeConnect Global, our core values, and the team committed to helping you find your dream property.{% endblock %}
+{% block og_image %}{% static 'img/logo.svg' %}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}About Us | HomeConnect Global{% endblock %}
+{% block twitter_description %}Learn more about HomeConnect Global, our mission, vision, and the dedicated team behind our success.{% endblock %}
+{% block twitter_image %}{% static 'img/logo.svg' %}{% endblock %}
+
+
+{% block content%}
+{% include 'messages.html' %} 
+
+<main>
+    <!-- about -->
+    <section class="about animate-on-scroll">
+        <div class="inner-about wrapper">
+            <div class="inner-service wrapper">    
+                <div class="know">
+                    <div class="about-service-text">
+                        <h3>Get to know us</h3>
+                        <p>At Ramos of Lagos Realty, we take pride in being your go-to resource for all your real estate needs in Lagos. Our dedicated team of professionals combines extensive market knowledge with a deep understanding of the local landscape to provide unparalleled service and results..</p>
+                    </div>
+                    <a href="/team">
+                      <button type="submit" class="about-btn">Meet the team</button>
+                    </a>
+                </div>
+                <img src="{% static 'img/get-to-know-us.avif' %}" alt="Image that signifies unity">
+            </div>
+        </div>
+    </section>
+    <!-- Mission && Vision -->
+
+    <div class="mission-container animate-on-scroll">
+        <div class="inner-mission-container wrapper">
+            <div class="vision">
+                <h3>Our Vision</h3>
+                <p>Our Vision is to be the premier real estate company in our region, known for our integrity, professionalism, and commitment to excellence. We strive to provide the highest level of service to our clients and to create value through the sales and management of top quality properties.</p>
+            </div>
+            <div class="vision">
+                <h3>Our Mission</h3>
+                <p>To innovate Real Estate marketing around the globe, through the power of digital marketing and social media, reflecting innovative ideas, creative minds and rewarding real estate opportunities that makes Ramos Real Estate the Game Changers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- agents -->
+     <div class="agents animate-on-scroll">
+        <div class="inner-agents wrapper">
+            <h3>Join our professional agents</h3>
+            <div class="reasons-to-join">
+                <img src="{% static 'img/team.avif' %}" alt="Team Image">
+                <div class="reasons-to-join-items">
+                    <h3>
+                        Why you should join?
+                    </h3>
+                            <ol class="items-parent">
+                                <li class="items">High Earning Potential: We offer a generous commission structure.</li>
+                                <li class="items">Incentives and Rewards: Agents have access to various incentives and rewards for exceptional performance.</li>
+                                <li class="items">Comprehensive Training and Support: We provide comprehensive training and support to help agents succeed in their roles.</li>
+                                <li class="items">Transparent and Fair Policies: This transparency can help build trust and loyalty among agents.</li>
+                                <li class="items">Collaborative Work Environment: Your brokerage fosters a collaborative work environment where agents can learn from each other, share ideas, and support one another.</li>
+                            </ol>
+                </div>
+            </div>
+        </div>
+     </div>
+
+     {% include "partners.html" %}
+
+     <section class="large-area animate-on-scroll">
+        <div class="cta-container wrapper">
+            <div class="about-cta-inner-container">
+                <h3>What We Provide?</h3>
+                <div class="services-provided">
+                    <div class="services-provided-item">
+                        <div class="container">
+                            <div class="services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Land/Property Marketing</h3>
+                                    <p>For Landlords and Property Owners, Ramos Realty offers a comprehensive marketing strategy to showcase their properties to a global audience. Our marketing campaigns are designed to attract qualified buyers and maximize the property's Value</p>
+                                </div>
+                          
+                            </div>
+                            <div class="services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+                                <div class="services-provided-text-container">
+                                    <h3>Empowering Smart Real Estate Decisions</h3>
+                                    <p>Whether you're buying, selling, or managing property, Ramos Realty provides insights and support to help you make confident and profitable decisions in today’s evolving real estate landscape.</p>
+                                </div>
+
+                            </div>
+                            <div class="services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Unlocking Property Value Across Borders</h3>
+                                    <p>Ramos Realty bridges local opportunities with global interest—helping you navigate property ownership, investment, and development with clarity and impact in Nigeria’s real estate sector.</p>
+                                </div>
+
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <svg width="100%" height="20%" viewBox="0 0 1364 796" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_568_2013" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1364" height="796">
+            <path d="M0 0.401855H1364V795.368H0V0.401855Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_568_2013)">
+            <path d="M1364 676H1258.82V544.744H1211.44V676H1160.08V457.435H1107.68V676H1068.88V497.289H990.519V676H905.691V294.225H762.915V676H731.635V412.997H682.571V676H639.591V149.983H545.337V676H505.707V480.212H438.232V676H413.654V459.334H347.853V676H256.333V339.78H205.593V676H167.639V539.044H100.155V676H0V669.006H93.9963V532.061H173.798V669.006H199.435V332.786H262.501V669.006H341.686V452.34H419.821V669.006H432.064V473.228H511.866V669.006H539.169V143H645.749V669.006H676.412V406.003H737.803V669.006H756.748V287.242H911.859V669.006H984.351V490.306H1075.03V669.006H1101.51V450.451H1166.25V669.006H1205.27V537.75H1264.99V669.006H1364V676Z" fill="#E5E8EA"/>
+            </g>
+        </svg>
+            
+     </section>
+
+</main>
+{% endblock %}

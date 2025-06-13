@@ -1,0 +1,209 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Properties | Home Connect Global{% endblock %}
+{% block meta_description %}Explore our diverse range of properties at Home Connect Global. Find your perfect property today.{% endblock %}
+{% block meta_keywords %}Home Connect Global, real estate, properties, property listings, homes for sale, real estate services{% endblock %}
+{% block other_css %}{% static 'css/properties.css' %}{% endblock %}
+{% block css %}{% static 'css/home.css' %}{% endblock %}
+
+{% block og_title %}Properties | Home Connect Global{% endblock %}
+{% block og_description %}Explore our diverse range of properties at Home Connect Global. Find your perfect property today.{% endblock %}
+{% block og_image %}{% static 'img/properties_og_image.jpg' %}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}Properties | Home Connect Global{% endblock %}
+{% block twitter_description %}Explore our diverse range of properties at Home Connect Global. Find your perfect property today.{% endblock %}
+{% block twitter_image %}{% static 'img/properties_twitter_image.jpg' %}{% endblock %}
+
+
+{% block content %}
+{% include 'messages.html' %}
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero-properties animate-on-scroll">
+        <div class="properties-container wrapper">
+            <div class="parent-hero-inner-properties">
+                <div class="hero-inner-properties">
+                    <h3>Properties</h3>
+                    <p>Explore a wide range of properties for rent and sale, expertly managed for your convenience. </p>
+                </div>
+            </div>
+    
+        
+            <form class="advanced-search-container" method="get" action="{% url 'properties' %}">
+                <div class="advanced-search">
+                    <div class="top-search-container">
+                        <div class="search-items">
+                            <h3>Location</h3>
+                            <div class="project-search-form relative">
+                                <img loading="lazy" class="absolute" src="{% static 'img/location.svg' %}" alt="Search Icon" />
+                                <select class="advanced-search-input" name="location" id="location">
+                                    <option value="">Select Location</option>
+                                    {% for location in locations %}
+                                        <option value="{{ location }}" {% if request.GET.location == location %}selected{% endif %}>{{ location }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-items">
+                            <h3>Property Types</h3>
+                            <div class="project-search-form">
+                                <select class="advanced-search-input-type" name="property_type" id="property_type">
+                                    <option value="">Select Property Type</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category }}" {% if request.GET.property_type == category %}selected{% endif %}>{{ category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-items">
+                            <h3>Listing Type</h3>
+                            <div class="project-search-form">
+                                <select class="advanced-search-input-type" name="listing_type" id="listing_type">
+                                    <option value="">Select Listing Type</option>
+                                    {% for listing_type in listing_types %}
+                                        <option value="{{ listing_type }}" {% if request.GET.listing_type == listing_type %}selected{% endif %}>{{ listing_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="advanced-search-btn-container">
+                        <button type="submit" class="advanced-search-btn">Search</button>
+                        <button class="reset" type="reset">Reset All</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+     <section class="property-display animate-on-scroll">
+    
+        <form class="filters" action="" method="GET">
+            {% csrf_token %}
+            <select name="bedrooms" id="bedroom_options" class="options">
+                <option value="">Select bedrooms</option>
+                {% for option in bedroom_options %}
+                    <option value="{{ option.no_of_bedrooms }}" {% if request.GET.bedrooms == option.no_of_bedrooms|stringformat:"i" %}selected{% endif %}>
+                        {{ option.no_of_bedrooms }} Bedrooms
+                    </option>
+                {% endfor %}
+            </select>
+        
+            <select name="floors" id="floors_options" class="options">
+                <option value="">Select floors</option>
+                {% for option in floor_options %}
+                    <option value="{{ option.no_of_floors }}" {% if request.GET.floors == option.no_of_floors|stringformat:"i" %}selected{% endif %}>
+                        {{ option.no_of_floors }} floors
+                    </option>
+                {% endfor %}
+            </select>
+        
+            <select name="bathrooms" id="bathroom_options" class="options">
+                <option value="">Select bathrooms</option>
+                {% for option in bathroom_options %}
+                    <option value="{{ option.no_of_bathrooms }}" {% if request.GET.bathrooms == option.no_of_bathrooms|stringformat:"i" %}selected{% endif %}>
+                        {{ option.no_of_bathrooms }} Bathrooms
+                    </option>
+                {% endfor %}
+            </select>
+        
+            <input class="filter-btn" type="submit" value="Apply Filters">
+        
+            <noscript>
+                <input type="submit" value="Apply">
+            </noscript>
+        </form>
+
+        <div class="property-display-cards">
+            {%for property in paginated_properties %}
+            <a class="property-link" href="{% url 'properties_details' property.slug %}">
+                <div class="property-display-card">
+                    <div class="property-display-card-inner">
+                        <img class="property-image"  loading="lazy" src="{{property.thumbnail.url|slice:'0:49' }}w_500,h_500,c_scale/{{ property.thumbnail.url|slice:'49:' }}" alt="{{property.title}}'s image" />
+                            <div class="property-unit-details">
+                                <div class="property-unit-details-top">
+                                    <div class="property-unit-detail">
+    
+                                        <div class="property-location">
+                                            <p>{{property.availability}}</p>
+                                            <p>{{property.location}}</p>
+                                        </div>
+                                        <h3>{{property.title}}</h3>
+                                        <p>{{property.description}} </p>
+    
+    
+                                    </div>
+                                    
+                            
+                                </div>
+
+
+                                <div class="properties-details-bottom">
+                                    <img src="{% static 'img/naira.svg' %}" alt=" Naira Symbol">
+                                    <p>{{property.price|format_int_with_commas}} 
+                                        {% if property.availability == 'Rent' %}
+                                            <span>/ Annually</span>
+                                        {% else %}
+                                            <span></span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                </div>
+            </a>
+            {% empty %}
+                <p class="service-info">No Property Available </p>
+            {%endfor%}
+          
+
+                
+            <div class="pagination">
+                <div class="pagination-text-container">
+                    <div class="pagination-text">
+                        <p>Showing</p> <span>{{paginated_properties.number}}</span>
+                    </div>
+                    <p>Of {{paginated_properties.paginator.num_pages}}</p>
+                </div>
+
+                <div class="pagination-numbers">
+                    {% if paginated_properties.has_previous %}
+                        <a  class="property-link" href="?page={{ paginated_properties.previous_page_number }}">
+                            <img src="{% static 'img/previous.svg' %}" alt="Previous button">
+                        </a>
+                    {% endif %}
+
+                        {% for page_num in paginated_properties.paginator.page_range %}
+                            <div class="pagination-number">
+                                <span {% if page_num == paginated_properties.number %} class="active"{% endif %}>
+                                    <a class="property-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                </span>
+                            </div>
+                        {%endfor%}
+                            {% if paginated_properties.has_next %}
+                                <a  class="property-link" href="?page={{ paginated_properties.next_page_number }}">
+                                    <img src="{% static 'img/next.svg' %}" alt="Next button">
+                                </a>
+                            {% endif %}
+                </div>
+            </div>
+        </div>
+     </section>
+
+     <svg class="property-svg" width="100%" height="20%" viewBox="0 0 1364 796" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_568_2013" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1364" height="796">
+        <path d="M0 0.401855H1364V795.368H0V0.401855Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_568_2013)">
+        <path d="M1364 676H1258.82V544.744H1211.44V676H1160.08V457.435H1107.68V676H1068.88V497.289H990.519V676H905.691V294.225H762.915V676H731.635V412.997H682.571V676H639.591V149.983H545.337V676H505.707V480.212H438.232V676H413.654V459.334H347.853V676H256.333V339.78H205.593V676H167.639V539.044H100.155V676H0V669.006H93.9963V532.061H173.798V669.006H199.435V332.786H262.501V669.006H341.686V452.34H419.821V669.006H432.064V473.228H511.866V669.006H539.169V143H645.749V669.006H676.412V406.003H737.803V669.006H756.748V287.242H911.859V669.006H984.351V490.306H1075.03V669.006H1101.51V450.451H1166.25V669.006H1205.27V537.75H1264.99V669.006H1364V676Z" fill="#E5E8EA"/>
+        </g>
+    </svg>
+{% endblock %}

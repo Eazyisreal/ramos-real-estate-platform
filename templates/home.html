@@ -1,0 +1,333 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% load widget_tweaks %}
+
+
+{% block title %}Home | HomeConnect Global{% endblock %}
+{% block meta_description %}Discover your dream home with HomeConnect Global. We offer a wide range of properties to meet all your real estate needs.{% endblock %}
+{% block meta_keywords %}real estate,HomeConnect Global, property listings, homes for sale, real estate services, buy property{% endblock %}
+{% block css %}{% static 'css/home.css' %}{% endblock %}
+
+{% block og_title %}Home |HomeConnect Global{% endblock %}
+{% block og_description %}Discover your dream home with HomeConnect Global. Explore our wide range of property listings and find the perfect place to call home.{% endblock %}
+{% block og_image %}{% static 'img/logo.svg' %}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}Home |HomeConnect Global{% endblock %}
+{% block twitter_description %}Discover your dream home with  HomeConnect Global. Explore our wide range of property listings and find the perfect place to call home.{% endblock %}
+{% block twitter_image %}{% static 'img/logo.svg' %}{% endblock %}
+
+{% block content%}
+{% include 'messages.html' %}
+
+<main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay loop muted>
+            <source src="{% static 'img/hero-background.mp4' %}" type="video/mp4">
+          </video>
+        <div class="video-overlay"></div>
+        <div class="inner-hero wrapper">
+            <div class="top-hero">
+                <h1>
+                    Uncover the best offers on the real estate market.
+                </h1>
+                <p>Discover a wide range of properties for rent and sale, expertly managed for your convenience. </p>
+            </div>
+            
+            <form class="advanced-search-container" method="get" action="{% url 'properties' %}">
+                <div class="advanced-search">
+                    <div class="top-search-container">
+                        <div class="search-items">
+                            <h3>Location</h3>
+                            <div class="project-search-form relative">
+                                <img loading="lazy" class="absolute" src="{% static 'img/location.svg' %}" alt="Search Icon" />
+                                <select class="advanced-search-input" name="location" id="location">
+                                    <option value="">Select Location</option>
+                                    {% for location in locations %}
+                                        <option value="{{ location }}" {% if request.GET.location == location %}selected{% endif %}>{{ location }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-items">
+                            <h3>Property Types</h3>
+                            <div class="project-search-form">
+                                <select class="advanced-search-input-type" name="property_type" id="property_type">
+                                    <option value="">Select Property Type</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category }}" {% if request.GET.property_type == category %}selected{% endif %}>{{ category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-items">
+                            <h3>Listing Type</h3>
+                            <div class="project-search-form">
+                                <select class="advanced-search-input-type" name="listing_type" id="listing_type">
+                                    <option value="">Select Listing Type</option>
+                                    {% for listing_type in listing_types %}
+                                        <option value="{{ listing_type }}" {% if request.GET.listing_type == listing_type %}selected{% endif %}>{{ listing_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="advanced-search-btn-container">
+                        <button type="submit" class="advanced-search-btn">Search</button>
+                        <button class="reset" type="reset">Reset All</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Properties listing section -->
+     <section class="properties animate-on-scroll">
+        <div class="inner-properties wrapper">
+            <div class="top-properties">
+                <div class="listing-text">
+                    <h3>Latest Listings</h3>
+                    <p>Explore the newest listings in your desired area and find your dream home today</p>
+                </div>
+
+                <div class="btn-container">
+                    <button class="properties-btn">See all</button>
+                </div>
+            </div>
+                <div class="properties-grid-container">
+                    <div class="properties-grid">
+                        {% for property in properties %}
+                        <a class="property-link" href="{% url 'properties_details' property.slug %}">
+                            <div class="property-card">
+                                <div class="property-image">
+                                    <img  loading="lazy" src="{{property.thumbnail.url|slice:'0:49' }}w_500,h_500,c_scale/{{ property.thumbnail.url|slice:'49:' }}" alt="{{property.title}}'s image" />
+                        
+                                </div>
+                                <div class="property-details">
+                                    <div class="property-details-top">
+                                        <div class="property-details-top-inner">
+                                            <p>{{property.availability}}</p>
+                                            <p>{{property.location}}</p>
+                                        </div>
+                                        <p>{{property.title}}</p>
+                                    </div>
+                                
+                                    <div class="properties-details-bottom">
+                                        <img src="{% static 'img/naira.svg' %}" alt=" Naira Symbol">
+                                        <p>{{property.price|format_int_with_commas}} 
+                                            {% if property.availability == 'Rent' %}
+                                                <span>/ Annually</span>
+                                            {% else %}
+                                                <span></span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <p class="service-info">No Property Available </p>
+                    {% endfor %}
+                    </div>
+                </div>
+        </div>
+     </section>
+
+
+     {% include "partners.html" %}
+
+      <!-- Services section -->
+    <section class="services-large-container animate-on-scroll">
+        <div class="inner-service wrapper">
+            <div class="services-text">
+                <h3>Services We Offer</h3>
+                <p id="service-description">
+                    At Ramos Realty, we make your home-buying journey seamless and enjoyable. Our expert agents are dedicated to helping you find the perfect property that meets your needs and fits your budget. From initial search to final paperwork, we provide personalized guidance, ensuring a smooth and stress-free experience. Explore our extensive listings of residential homes, apartments, and luxury estates to find your dream home today.
+                </p>
+            </div>
+            <div class="services-offered">
+                <div class="services-container" data-service="rental">
+                    <div class="services">
+                        <h3>Property Rental</h3>
+                        <img src="{% static 'img/closed-arrow.svg' %}" alt="">
+                    </div>
+                    <hr>
+                    <p class="service-info" style="display: none;">At Ramos Realty, we make your home-buying journey seamless and enjoyable. Our expert agents are dedicated to helping you find the perfect property that meets your needs and fits your budget. From initial search to final paperwork, we provide personalized guidance, ensuring a smooth and stress-free experience. Explore our extensive listings of residential homes, apartments, and luxury estates to find your dream home today.</p>
+                </div>
+
+                <div class="services-container" data-service="sales">
+                    <div class="services">
+                        <h3>Property Sales</h3>
+                        <img src="{% static 'img/closed-arrow.svg' %}" alt="">
+                    </div>
+                    <hr>
+                    <p class="service-info" style="display: none;">Explore our property sales service, offering a curated selection of homes for sale. Our team will guide you through every step of buying your dream home.</p>
+                </div>
+
+                <div class="services-container" data-service="management">
+                    <div class="services">
+                        <h3>Property Management</h3>
+                        <img src="{% static 'img/closed-arrow.svg' %}" alt="">
+                    </div>
+                    <hr>
+                    <p class="service-info" style="display: none;">Our property management service ensures that your properties are well-maintained and managed efficiently. We handle everything from tenant relations to property maintenance.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-service wrapper">
+            <img src="{% static 'img/get-to-know-us.avif' %}" alt="Image that signifies unity">
+
+            <div class="know">
+                <div class="service-text">
+                    <h3>Get to know us</h3>
+                    <p>At Ramos of Lagos Realty, we take pride in being your go-to resource for all your real estate needs in Lagos. Our dedicated team of professionals combines extensive market knowledge with a deep understanding of the local landscape to provide unparalleled service and results.</p>
+                </div>
+                <a href="/about-us">
+                    <button type="submit" class="advanced-search-btn">Learn more</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+     <section class="managed-properties animate-on-scroll">
+        <div class="inner-managed-properties wrapper">
+            <div class="managed-properties-text-container">
+                <h3>Managed Properties</h3>
+                <p>Explore the properties we are managing  in your desired area and find your dream home today</p>
+            </div>
+            
+
+            <div class="managed-properties-grid">
+                 {% for property in managed_properties %}
+                    <a class="property-link" href="{% url 'management_details' property.slug %}">
+                        <div class="managed-property-card">
+                            <div class="managed-property-image">
+                                <img width="500" height="500" loading="lazy" src="{{property.thumbnail.url|slice:'0:49' }}w_500,h_500,c_scale/{{ property.thumbnail.url|slice:'49:' }}" alt="{{property.title}}'s image" />
+                            </div>
+                            <div class="managed-property-details">
+                                <div class="managed-property-details-top">
+                                    <div class="managed-property-details-top-inner">
+                                        <p>{{property.availability}}</p>
+                                        <p>{{property.location}}</p>
+                                    </div>
+                                    <p>{{property.title}}</p>
+                                </div>
+                                <div class="managed-properties-details-bottom">
+                                    <img src="{% static 'img/naira-white.svg' %}" alt=" Naira Symbol">
+                                    <p>{{property.price|format_int_with_commas}} 
+                                        {% if property.availability == 'Rent' %}
+                                            <span>/ Annually</span>
+                                        {% else %}
+                                            <span></span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% empty %}
+                        <p class="managed-service-info">No Property Available </p>
+                    {% endfor %}
+            </div>
+            <div class="controls">
+                <img src="{% static '/img/arrow-left.svg' %}" alt="Arrow facing left">
+                <img src="{% static '/img/arrow-right.svg' %}" alt="Arrow facing right">
+            </div>
+        </div>
+     </section>
+
+     <section class="large-area animate-on-scroll">
+        <div class="cta-container wrapper">
+            <div class="cta-inner-container">
+                <div class="cta-inner-container-top">
+                    <h3>Manage your properties with us</h3>
+                    <p>Explore a wide range of properties for rent and sale, expertly managed for your convenience. </p>
+                </div>
+
+                <button class="manage-btn">
+                    Sign In
+                  </button>
+            </div>
+        </div>
+
+      {% include "testimonials.html" %}
+
+        <svg width="100%" height="20%" viewBox="0 0 1364 796" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_568_2013" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1364" height="796">
+            <path d="M0 0.401855H1364V795.368H0V0.401855Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_568_2013)">
+            <path d="M1364 676H1258.82V544.744H1211.44V676H1160.08V457.435H1107.68V676H1068.88V497.289H990.519V676H905.691V294.225H762.915V676H731.635V412.997H682.571V676H639.591V149.983H545.337V676H505.707V480.212H438.232V676H413.654V459.334H347.853V676H256.333V339.78H205.593V676H167.639V539.044H100.155V676H0V669.006H93.9963V532.061H173.798V669.006H199.435V332.786H262.501V669.006H341.686V452.34H419.821V669.006H432.064V473.228H511.866V669.006H539.169V143H645.749V669.006H676.412V406.003H737.803V669.006H756.748V287.242H911.859V669.006H984.351V490.306H1075.03V669.006H1101.51V450.451H1166.25V669.006H1205.27V537.75H1264.99V669.006H1364V676Z" fill="#E5E8EA"/>
+            </g>
+        </svg>
+            
+     </section>
+</main>
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/gsap.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const serviceDescription = document.querySelector('.services-text p');
+    
+        if (!serviceDescription) {
+            console.error('Service description element not found!');
+            return;
+        }
+    
+        const servicesInfo = {
+            rental: "At Home Connect Nigeria, we make your home-buying journey seamless and enjoyable. Our expert agents are dedicated to helping you find the perfect property that meets your needs and fits your budget. From initial search to final paperwork, we provide personalized guidance, ensuring a smooth and stress-free experience. Explore our extensive listings of residential homes, apartments, and luxury estates to find your dream home today.",
+            sales: "Explore our property sales service, offering a curated selection of homes for sale. Our team will guide you through every step of buying your dream home.",
+            management: "Our property management service ensures that your properties are well-maintained and managed efficiently. We handle everything from tenant relations to property maintenance."
+        };
+    
+        // Function to check screen size
+        function isMobile() {
+            return window.innerWidth < 475;
+        }
+    
+        document.querySelectorAll('.services-container').forEach(container => {
+            container.addEventListener('click', () => {
+                const serviceType = container.getAttribute('data-service');
+                serviceDescription.textContent = servicesInfo[serviceType] || servicesInfo['rental'];
+    
+                // Reset all arrows and hide service info
+                document.querySelectorAll('.services-container img').forEach(img => {
+                    img.src = '{% static "img/closed-arrow.svg" %}';
+                });
+                document.querySelectorAll('.service-info').forEach(info => {
+                    info.style.display = 'none';
+                });
+    
+                // Toggle clicked service
+                const icon = container.querySelector('img');
+                const serviceInfo = container.querySelector('.service-info');
+                icon.src = '{% static "img/open-arrow.svg" %}';
+    
+                // Only show .service-info if the screen is < 992px
+                if (isMobile()) {
+                    serviceInfo.style.display = 'block';
+                }
+            });
+        });
+    
+        // Optional: Add resize listener to handle dynamic changes in screen size
+        window.addEventListener('resize', () => {
+            if (!isMobile()) {
+                document.querySelectorAll('.service-info').forEach(info => {
+                    info.style.display = 'none'; // Hide service-info on larger screens
+                });
+            }
+        });
+    });
+    
+</script>
+{% endblock %}

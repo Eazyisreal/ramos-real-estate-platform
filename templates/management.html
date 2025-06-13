@@ -1,0 +1,304 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Managed Projects|HomeConnect Global{% endblock %}
+{% block meta_description %}Discover the latest Managed Projects by HomeConnect Global, showcasing our commitment to excellence in real estate.{% endblock %}
+{% block meta_keywords %}e-Swift, real estate, Managed Projects, property development{% endblock %}
+{% block css %}{% static 'css/home.css' %}{% endblock %}
+{% block more_css %}{% static 'css/about.css' %}{% endblock %}
+{% block other_css %}{% static 'css/management.css' %}{% endblock %}
+
+{% block og_title %}Managed Properties | HomeConnect Global{% endblock %}
+{% block og_description %}Discover the latest Managed Projects byHomeConnect Global, showcasing our commitment to excellence in real estate.{% endblock %}
+{% block og_image %}{% static 'img/Managed Projects_og_image.jpg' %}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}Managed Projects | HomeConnect Global{% endblock %}
+{% block twitter_description %}Discover the latest Managed Projects by HomeConnect Global, showcasing our commitment to excellence in real estate.{% endblock %}
+{% block twitter_image %}{% static 'img/Managed Projects_twitter_image.jpg' %}{% endblock %}
+
+
+{% block content %}
+{% include 'messages.html' %}
+
+    <section class="management animate-on-scroll">
+        <div class="inner-management wrapper">
+            <div class="management-text-container">
+                <h3>Need help in managing your property?</h3>
+                <p>Explore a wide range of properties for rent and sale, expertly managed for your convenience. </p>
+            </div>
+            <button class="management-btn">
+                Sign Up
+              </button>
+        </div>
+    </section>
+
+    <section class="large-area animate-on-scroll">
+        <div class="cta-container wrapper">
+            <div class="about-cta-inner">
+                <h3>What you stand to gain</h3>
+                <div class="services-provided">
+                    <div class="services-provided-item">
+                        <div class="container">
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Binding Agreement Marketing</h3>
+                                    <p>We have binding agreement with every
+                                        tenant to ensure compliance of rules and
+                                        regulations agreed on by the landlord.</p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Monthly Inspection</h3>
+                                    <p>Our field agents does a detailed monthly
+                                        inspection on your property to ensure that
+                                        there is no violation on your property.</p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Report & Review</h3>
+                                    <p>We create report and review on your
+                                    property each month and give you an
+                                    insightful feedback.
+                                    </p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Screening of Tenants</h3>
+                                    <p>We screen all tenants properly to ensure
+                                        they are suited for your property tenancy
+                                        demands
+                                    </p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Website Viewing</h3>
+                                    <p>We place your property on our website and
+                                        various platforms when its available for rent
+                                        or sale and you get to view/check from
+                                        anywhere in the world as a landlord
+                                    </p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>No Late Payments</h3>
+                                    <p>We have our legal department and as so we
+                                        enter into a legal agreement with the tenant
+                                        as regards yearly payment. No late payment
+                                        will be tolerated
+                                    </p>
+                                </div>
+                          
+                            </div>
+                            <div class="management-services-provided-inner">
+                                <div class="img-container">
+                                    <img src="{% static 'img/house.svg' %}" alt="houseImage">
+                                </div>
+    
+                                <div class="services-provided-text-container">
+                                    <h3>Savings Plan</h3>
+                                    <p>We offer a savings plan that helps you save
+                                        towards repairs, renovation, maintenance
+                                        and future development
+                                    </p>
+                                </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </section>
+
+    <section class="management-large-area animate-on-scroll">
+        <div class="management-properties-container wrapper">
+            <div class="management-properties-text-container">
+                <h3>Properties we manage</h3>
+
+                <div>
+                    <button class="contact-us-btn">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+                    
+            <div class="management-property-display-cards">
+                {%for property in paginated_properties %}
+                    <a class="property-link" href="{% url 'management_details' property.slug %}">
+                        <div class="property-display-card">
+                            <div class="property-display-card-inner">
+                                <img class="property-image"  loading="lazy" src="{{property.thumbnail.url|slice:'0:49' }}w_500,h_500,c_scale/{{ property.thumbnail.url|slice:'49:' }}" alt="{{property.title}}'s image" />
+                                    <div class="property-unit-details">
+                                        <div class="property-unit-details-top">
+                                            <div class="property-unit-detail">
+            
+                                                <div class="property-location">
+                                                    <p>{{property.availability}}</p>
+                                                    <p>{{property.location}}</p>
+                                                </div>
+                                                <h3>{{property.title}}</h3>
+                                                <p>{{property.description}} </p>
+            
+            
+                                            </div>
+                                            
+                                    
+                                        </div>
+
+
+                                        <div class="properties-details-bottom">
+                                            <img src="{% static 'img/naira.svg' %}" alt=" Naira Symbol">
+                                            <p>{{property.price|format_int_with_commas}} 
+                                                {% if property.availability == 'Rent' %}
+                                                    <span>/ Annually</span>
+                                                {% else %}
+                                                    <span></span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="service-info">No Property Available </p>
+                {%endfor%}
+
+            </div>
+        </div>
+    </section>  
+
+    <section id="faq" class="managed-properties animate-on-scroll">
+        <div class="faq-container">
+            <div class="inner-faq-container">
+                <h3>FAQ</h3>
+        
+                <div class="faq">
+                    <div class="faq-items">
+                        <div class="faq-question">
+                            <h4>What is included in your property management service?</h4>
+                            <img src="{% static 'img/add-icon.svg' %}" alt="add-icon" class="icon add-icon">
+                            <img src="{% static 'img/remove-icon.svg' %}" alt="remove-icon" class="icon remove-icon" style="display:none;">
+                        </div>
+                        <p class="faq-answer">
+                            Our property management service delivers comprehensive care for your investment property. We handle everything from marketing and tenant placement to maintenance coordination and financial reporting, ensuring your property performs optimally while requiring minimal involvement from you. Our services include professional marketing, thorough tenant screening, regular inspections, and complete financial management.
+                            </p>
+                    </div>
+                    <hr>
+                    <div class="faq-items">
+                        <div class="faq-question">
+                            <h4> How do you screen potential tenants </h4>
+                            <img src="{% static 'img/add-icon.svg' %}" alt="add-icon" class="icon add-icon">
+                            <img src="{% static 'img/remove-icon.svg' %}" alt="remove-icon" class="icon remove-icon" style="display:none;">
+                        </div>
+                        <p class="faq-answer" style="display:none;">We take tenant screening seriously. Our process involves checking credit history, verifying employment and income, contacting previous landlords for references, and conducting background checks. This thorough approach helps us find reliable tenants who will care for your property and maintain timely payments.
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="faq-items">
+                        <div class="faq-question">
+                            <h4>What happens if a tenant doesn't pay rent?</h4>
+                            <img src="{% static 'img/add-icon.svg' %}" alt="add-icon" class="icon add-icon">
+                            <img src="{% static 'img/remove-icon.svg' %}" alt="remove-icon" class="icon remove-icon" style="display:none;">
+                        </div>
+                        <p class="faq-answer" style="display:none;">When rent payment issues arise, we act swiftly. Our team immediately contacts late-paying tenants, issues formal notices if needed, and works to resolve the situation quickly. If necessary, we handle the entire eviction process through our experienced legal partners, protecting your interests every step of the way.</p>
+                    </div>
+                    <hr>
+                    <div class="faq-items">
+                        <div class="faq-question">
+                            <h4>How do you handle maintenance requests?</h4>
+                            <img src="{% static 'img/add-icon.svg' %}" alt="add-icon" class="icon add-icon">
+                            <img src="{% static 'img/remove-icon.svg' %}" alt="remove-icon" class="icon remove-icon" style="display:none;">
+                        </div>
+                        <p class="faq-answer" style="display:none;">For maintenance requests, we provide 24/7 emergency response and quick handling of routine repairs through our network of trusted contractors. All maintenance issues are addressed promptly, with emergency situations receiving immediate attention. We oversee all repairs and provide regular updates, ensuring your property stays well-maintained while controlling costs</p>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        
+        
+    </section>
+    
+    <div class="adjust animate-on-scroll">
+      {% include "testimonials.html" %}
+    </div>
+
+      <svg width="100%" height="20%" viewBox="0 0 1364 796" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_568_2013" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="1364" height="796">
+        <path d="M0 0.401855H1364V795.368H0V0.401855Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_568_2013)">
+        <path d="M1364 676H1258.82V544.744H1211.44V676H1160.08V457.435H1107.68V676H1068.88V497.289H990.519V676H905.691V294.225H762.915V676H731.635V412.997H682.571V676H639.591V149.983H545.337V676H505.707V480.212H438.232V676H413.654V459.334H347.853V676H256.333V339.78H205.593V676H167.639V539.044H100.155V676H0V669.006H93.9963V532.061H173.798V669.006H199.435V332.786H262.501V669.006H341.686V452.34H419.821V669.006H432.064V473.228H511.866V669.006H539.169V143H645.749V669.006H676.412V406.003H737.803V669.006H756.748V287.242H911.859V669.006H984.351V490.306H1075.03V669.006H1101.51V450.451H1166.25V669.006H1205.27V537.75H1264.99V669.006H1364V676Z" fill="#E5E8EA"/>
+        </g>
+    </svg>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+        
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement; 
+                    const answer = faqItem.querySelector('.faq-answer'); 
+                    const addIcon = faqItem.querySelector('.add-icon');
+                    const removeIcon = faqItem.querySelector('.remove-icon');
+                    
+                    if (answer.style.display === "block") {
+                        answer.style.display = "none";
+                        addIcon.style.display = "inline";
+                        removeIcon.style.display = "none";
+                        faqItem.classList.remove('active');
+                    } else {
+                        answer.style.display = "block";
+                        addIcon.style.display = "none";
+                        removeIcon.style.display = "inline";
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        
+    </script>
+
+{% endblock %}

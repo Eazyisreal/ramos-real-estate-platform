@@ -1,0 +1,159 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta_description %}{% endblock %}" />
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% block css %}{% endblock %}">
+    <link rel="stylesheet" href="{% block other_css %}{% endblock %}">
+    <link rel="stylesheet" href="{% block more_css %}{% endblock %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/logo.jpg' %}" />
+    {% block extra_head %}{% endblock %}
+    {% load livereload_tags %}
+    <meta property="og:title" content="{% block og_title %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}{% endblock %}">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@YourTwitterHandle">
+    <meta name="twitter:title" content="{% block twitter_title %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}">
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <section class="">
+      <header class="header animate-on-scroll">
+        <div class="inner-header wrapper">
+          <a class="logo" href="/">
+            <img class="logo-icon" src="{% static 'img/logo.jpg' %}" alt="logo">
+          </a>
+          <ul class="nav-links">
+            <li class="nav-items"><a href="/about-us">About Us</a></li>
+            <li class="nav-items"><a href="/properties">Properties</a></li>
+            <li class="nav-items"><a href="/management">Management</a></li>
+            <li class="nav-items"><a href="/contact">Contact Us</a></li>
+          </ul>
+          <button class="btn">
+            Sign In
+          </button>
+        </div>
+
+        <div class="mobile-inner-header">
+            
+          <a class="logo" href="/">
+            <img class="logo-icon" src="{% static 'img/logo.jpg' %}" alt="logo">
+          </a>
+          <ul id="nav" class="nav-links">
+            <li class="nav-items"><a href="/about-us">About Us</a></li>
+            <li class="nav-items"><a href="/properties">Properties</a></li>
+            <li class="nav-items"><a href="/management">Management</a></li>
+            <li class="nav-items"><a href="/contact">Contact Us</a></li>
+          </ul>
+          <button id="btn" class="btn">
+            Sign In
+          </button>
+          <div class="harmburger-parent">
+              <div id="hamburger" class="harmburger">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+      </header>
+      {% block content %}
+      {% endblock %}
+      <footer class="footer animate-on-scroll">
+      <div class="wrapper">
+        <div class="frame-container">
+          <div class="upper-frame-wrapper">
+            <div class="upper-frame">
+              <div class="inner-upper-frame">
+                  <div class="text-container">
+                    <h3>Join Us As An Agent</h3>
+                    <p>Are you passionate about real estate and dedicated to delivering exceptional service?</p>
+                  </div>
+
+                  <div class="btn-container">
+                    <a class="property-link" href="/contact">
+                      <button class="manage-btn">
+                        Contact
+                      </button>
+                    </a>
+                    
+                    <button class="properties-btn">Read More</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="lower-frame">
+                <div class="inner-lower-frame">
+                    <div class="top-info-div">
+                        <div class="newsletter">
+                          <div class="inner-newsletter">
+                            <h3>Subscribe to <br/> our newsletter</h3>
+                            <form class="input-container" method="post" action="{{request.path}}">
+                            {% csrf_token %}
+
+                              <!-- <input class="email-input" placeholder="Email Address" type="email" name="email" id="email"> -->
+                              {% render_field newsletter_form.email placeholder='Email Address' class+="email-input" %}
+                              {% if newsletter_form.errors.email %}
+                                  <p class="error">{{ newsletter_form.errors.email }}</p>
+                              {% endif %}
+                              <button type="submit" class="newsletter-btn"></button>
+                            </form>
+                          </div>
+                          <p>Feel free to unsubscribe from these communications at any time. For more information on how to do so, our privacy practices, and our commitment to protecting your privacy, please review our Privacy Policy.</p>
+                        </div>
+                      </div>
+                      <div class="quick-links-grid">
+                        {% for link in quick_links %}
+                            <div class="quick-links-column">
+                                <h2>{{ link.title }}</h2>
+                                <ul class="quick-links-list">
+                                    {% for child in link.children %}
+                                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+  
+                <div class="outer-lower-frame">
+                    <hr>
+                    <div class="bottom-links">
+                        <h3>© Copyright 2024 Homeconnectng. All Rights Reserved</h3>
+                        <div class="social-links">
+                            <h3>Get In Touch</h3>
+                            <ul class="social-link-items">
+                                <li><a href=""><img src="{% static 'img/whatsapp.svg' %}" alt=""></a></li>
+                                <li><a href=""><img src="{% static 'img/facebook.svg' %}" alt=""></a></li>
+                                <li><a href=""><img src="{% static 'img/instagram.svg' %}" alt=""></a></li>
+  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      </footer>
+    </section>
+    <script>
+      
+    </script>
+    <script src="{% static 'js/hamburger.js' %}"></script>
+    <script src="{% static 'js/gsap.js' %}"></script>
+
+</html>
