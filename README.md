@@ -1,39 +1,47 @@
-# Home Connect Realestate Management Web application
+# Ramos Real Estate Listing Platform
 
-## Overview
+A CMS-powered real estate listing platform built with Django and Docker. Designed as part of a Full Stack Developer assessment for Ramos Real Estate, this application allows internal teams to manage property listings, link agents, and provide a clean, responsive browsing experience for end-users.
 
-This web application is designed for a real estate company to facilitate connections between landlords and tenants. It provides a platform where the company can manage properties on behalf of landlords, and tenants can book apartments or rooms for rent.
 
+## ✅ Project Summary
+
+- Admin-side property management
+- Filterable public listings
+- Agent and team representation
+- Detail pages for properties
+- A fully responsive UI built using Django templates and Tailwind CSS
+- Containerized architecture using Docker
+- PostgreSQL-backed database hosted on Render
+
+---
 ## Features
 
-### For Landlords
-- **Property Management:** Add, update, and delete property listings.
-- **Tenant Management:** View tenant details and lease agreements.
-- **Payment Tracking:** Monitor rent payments and receive notifications for due payments.
-- **Maintenance Requests:** Receive and manage maintenance requests from tenants.
 
-### For Tenants
-- **Browse Listings:** Search and filter available apartments and rooms.
-- **Booking:** Book apartments or rooms directly through the app.
-- **Payment:** Make rent payments online.
-- **Maintenance Requests:** Submit maintenance requests and track their status.
+### 🧑‍💼 Admin (CMS) Side
+- Add, edit, delete property listings via Django admin
+- Attach listing agents to each property
 
-### For Real Estate Company Staff
-- **Property Portfolio Management:** Manage multiple properties for different landlords.
-- **Tenant Relations:** Handle communication and service requests from tenants.
-- **Reporting:** Generate reports on property performance and tenant activities.
+### 🌍 Public-Facing Side
+- Property listings page with search and filter (location, price, bedrooms, etc.)
+- Dynamic property detail pages with images, specs, and agent information
+- Agent/team page to showcase listing professionals
+- SEO-friendly URLs using slugs
+- Responsive and mobile-ready layout
 
 ## Technologies Used
-- **Backend:** Django (Python)
-- **Frontend:** HTML, CSS, JavaScript
-- **Database:** PostgreSQL
-- **Authentication:** Django's built-in authentication system
-- **APIs:** Integration with third-party payment and notification APIs
+| Layer         | Technology                   |
+|---------------|-------------------------------|
+| Backend       | Django 4.x (Python 3.11)       |
+| Database      | PostgreSQL (Hosted on Render) |
+| Frontend      | Tailwind CSS, HTML, JS         |
+| Auth System   | Django built-in authentication |
+| Containerization | Docker + Docker Compose     |
+| Hosting       | Render                        |
 
-## Installation
+---
 
 ### Prerequisites
-- Python 3.x
+- Python 3.8
 - Django
 - PostgreSQL
 
@@ -41,8 +49,7 @@ This web application is designed for a real estate company to facilitate connect
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/Homeconnect-Global-Real-Estate-Management-System.git/
-   cd realestate-company-app
+   git clone https://github.com/yourusername/ramos-real-estate-platform.git/
    ```
 
 2. **Create a virtual environment:**
