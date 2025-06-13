@@ -244,6 +244,10 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://ramos-real-estate-platform.onrender.com/'
+    'https://ramos-real-estate-platform.onrender.com'
 ]
+
+CSRF_COOKIE_SECURE = True
