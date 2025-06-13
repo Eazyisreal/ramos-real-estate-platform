@@ -84,35 +84,6 @@ A CMS-powered real estate listing platform built with Django and Docker. Designe
 8. **Access the app:**
    Open your browser and go to `http://127.0.0.1:8000/`
 
-## Usage
-
-### For Landlords
-1. **Sign Up/Login:**
-   Create an account or log in.
-2. **Add Properties:**
-   Navigate to the 'Add Property' section and fill in the details.
-3. **Manage Properties:**
-   View and update property listings.
-
-### For Tenants
-1. **Sign Up/Login:**
-   Create an account or log in.
-2. **Browse Listings:**
-   Use the search and filter options to find suitable apartments or rooms.
-3. **Book a Property:**
-   Select a property and complete the booking process.
-4. **Make Payments:**
-   Navigate to the 'Payments' section and complete the payment process.
-
-### For Real Estate Company Staff
-1. **Sign Up/Login:**
-   Create an account or log in.
-2. **Manage Properties:**
-   View and manage multiple properties.
-3. **Handle Tenant Requests:**
-   Manage maintenance requests and tenant communications.
-4. **Generate Reports:**
-   Navigate to the 'Reports' section to generate performance reports.
 
 ## Contributing
 
