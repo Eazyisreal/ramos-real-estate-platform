@@ -282,7 +282,9 @@
 }
 
 .team-card img {
-    width: 100% border-radius: 1.25rem;
+    width: 100%;
+    border-radius: 1.25rem;
+    height: 500px;
 }
 
 .team-mate-details {
